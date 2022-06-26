@@ -20,6 +20,9 @@ def inicio(request):
 
       return render(request, "AppCoder/inicio.html")
 
+def busqueda_estudiantes(request):
+      
+      return render(request, "busqueda_estudiantes.html")
 
 
 def estudiantes(request):
