@@ -4,10 +4,24 @@
 
 {% block contenidoQueCambia %}
 
+
     <!--Aquí va lo que cambia, y lo asociado a está vista :) -->
     <h1>Estudiantes</h1>
-    <p>Info de los estudiantes</p>
-   
+    <p>Ingresar nuevo estudiante:</p>
 
+  
+<form action="" method="POST">{% csrf_token %}
+
+<table>
+
+        {{ miFormulario.as_table }}
+
+</table>
+
+<input type="submit", value="enviar">
+
+
+  </form>
+</body>
 
 {% endblock %}

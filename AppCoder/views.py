@@ -1,8 +1,8 @@
 from django.http.request import QueryDict
 from django.shortcuts import render, HttpResponse
 from django.http import HttpResponse
-from AppCoder.models import Curso, Profesor
-from AppCoder.forms import CursoFormulario, ProfesorFormulario
+from AppCoder.models import Curso, Estudiante, Profesor
+from AppCoder.forms import CursoFormulario, EstudianteFormulario, ProfesorFormulario
 
 # Create your views here.
 
@@ -20,14 +20,30 @@ def inicio(request):
 
       return render(request, "AppCoder/inicio.html")
 
-def busqueda_estudiantes(request):
-      
-      return render(request, "busqueda_estudiantes.html")
-
 
 def estudiantes(request):
-
-      return render(request, "AppCoder/estudiantes.html")
+      
+      if request.method == 'POST':
+            
+            miFormulario = EstudianteFormulario (request.POST)
+            
+            print(miFormulario)
+            
+            if miFormulario.is_valid:
+                  
+                  informacion = miFormulario.cleaned_data
+                  
+                  alumno = Estudiante (nombre=informacion['nombre'], apellido=informacion['apellido'], email=informacion['email'])
+                  
+                  alumno.save()
+                  
+                  return render(request, "AppCoder/inicio.html")
+            
+      else:
+            
+            miFormulario= EstudianteFormulario()
+            
+      return render(request, "AppCoder/estudiantes.html", {"miFormulario":miFormulario})
 
 
 def entregables(request):
